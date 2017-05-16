@@ -171,6 +171,11 @@ def view_post():
     return jsonify(get_dict(
         'url', 'args', 'form', 'data', 'origin', 'headers', 'files', 'json'))
 
+@app.route('/post/basic', methods=('POST',))
+def view_post_basic():
+    """Returns basic information about the POST request"""
+
+    return jsonify(get_dict('url', 'args', 'headers', 'origin'))
 
 @app.route('/put', methods=('PUT',))
 def view_put():
