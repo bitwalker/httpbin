@@ -4,9 +4,18 @@ ENV WEB_CONCURRENCY=4
 
 ADD . /httpbin
 
-RUN apk add --update python python-dev py-pip build-base ca-certificates libffi-dev
-RUN pip install --upgrade pip
-RUN pip install gunicorn && pip install /httpbin
+RUN apk --no-cache upgrade && \
+    apk add --no-cache \
+        python \
+        python-dev \
+        py-pip \
+        build-base \
+        ca-certificates \
+        libffi-dev
+RUN update-ca-certificates --fresh && \
+    pip install --upgrade pip && \
+    pip install gunicorn && \
+    pip install /httpbin
 
 EXPOSE 8080
 
